@@ -739,7 +739,7 @@
     .testimonials-section {
       background:
         linear-gradient(180deg, rgba(26, 60, 46, 0.93) 0%, rgba(26, 48, 64, 0.93) 100%),
-        url('Imagens/Combu5.png') center/cover no-repeat;
+        url('Imagens/Combu4.png') center/cover no-repeat;
       color: var(--white);
     }
 
@@ -1531,6 +1531,198 @@
       padding: 0 24px 20px;
     }
 
+    /* ─── PARALLAX DIVIDER ─── */
+    .parallax-divider {
+      position: relative;
+      height: 50vh;
+      min-height: 340px;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .parallax-divider::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          rgba(10, 26, 18, 0.7) 0%,
+          rgba(10, 26, 18, 0.4) 40%,
+          rgba(10, 26, 18, 0.4) 60%,
+          rgba(10, 26, 18, 0.7) 100%);
+    }
+
+    .parallax-quote {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 680px;
+      padding: 0 24px;
+    }
+
+    .parallax-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.5;
+      margin: 0;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .parallax-quote .parallax-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 24px auto 0;
+      opacity: 0.7;
+    }
+
+    /* ─── PHOTO GALLERY MARQUEE ─── */
+    .gallery-section {
+      padding: 80px 0;
+      background: var(--green-deep);
+      overflow: hidden;
+    }
+
+    .gallery-section .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .gallery-section .section-title {
+      color: var(--cream);
+    }
+
+    .gallery-section .section-label {
+      color: var(--gold);
+    }
+
+    .gallery-track-wrapper {
+      position: relative;
+    }
+
+    .gallery-track-wrapper::before,
+    .gallery-track-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .gallery-track-wrapper::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--green-deep), transparent);
+    }
+
+    .gallery-track-wrapper::after {
+      right: 0;
+      background: linear-gradient(-90deg, var(--green-deep), transparent);
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: marquee 45s linear infinite;
+    }
+
+    .gallery-track:hover {
+      animation-play-state: paused;
+    }
+
+    .gallery-item {
+      position: relative;
+      width: 360px;
+      height: 260px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 16px 14px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.4s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ─── EXPERIENCE MINI-GALLERY ─── */
+    .exp-thumbnails {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .exp-thumb {
+      width: 64px;
+      height: 48px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid rgba(200, 168, 78, 0.2);
+      transition: all 0.3s ease;
+      opacity: 0.65;
+    }
+
+    .exp-thumb:hover,
+    .exp-thumb.active {
+      border-color: var(--gold);
+      opacity: 1;
+    }
+
+    .exp-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .exp-image img {
+      transition: opacity 0.4s ease;
+    }
+
     /* ─── RESPONSIVE STICKY CTA ─── */
     @media (max-width: 640px) {
       .sticky-cta-text {
@@ -1549,6 +1741,22 @@
 
       .hero-cta-group {
         gap: 16px;
+      }
+
+      .parallax-divider {
+        background-attachment: scroll;
+        height: 40vh;
+        min-height: 260px;
+      }
+
+      .gallery-item {
+        width: 280px;
+        height: 200px;
+      }
+
+      .exp-thumb {
+        width: 52px;
+        height: 40px;
       }
     }
   </style>
@@ -1934,6 +2142,14 @@
     </div>
   </section>
 
+  <!-- ═══ PARALLAX DIVIDER ═══ -->
+  <div class="parallax-divider" style="background-image: url('Imagens/Combu3.png')">
+    <div class="parallax-quote fade-in">
+      <blockquote>"Onde a floresta encontra o rio, o sagrado encontra você."</blockquote>
+      <div class="parallax-line"></div>
+    </div>
+  </div>
+
   <!-- ═══ IMMERSIVE EXPERIENCES ═══ -->
   <section class="section experiences-section" id="experiencias">
     <div class="container">
@@ -1948,6 +2164,12 @@
       <div class="exp-card fade-in">
         <div class="exp-image">
           <img src="Imagens/Basílica2.jpg" alt="Basílica de Nossa Senhora de Nazaré" loading="lazy">
+          <div class="exp-thumbnails">
+            <div class="exp-thumb active" onclick="switchExpImg(this, 'Imagens/Basílica2.jpg')"><img
+                src="Imagens/Basílica2.jpg" alt="Basílica 1" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/Basílica3.jpg')"><img
+                src="Imagens/Basílica3.jpg" alt="Basílica 2" loading="lazy"></div>
+          </div>
         </div>
         <div class="exp-text">
           <span class="exp-label">Dia 15/10</span>
@@ -1962,6 +2184,12 @@
       <div class="exp-card fade-in">
         <div class="exp-image">
           <img src="Imagens/Ladir2.jpg" alt="Sítio do Seu Ladir" loading="lazy">
+          <div class="exp-thumbnails">
+            <div class="exp-thumb active" onclick="switchExpImg(this, 'Imagens/Ladir2.jpg')"><img
+                src="Imagens/Ladir2.jpg" alt="Ladir 1" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/Ladir3.jpeg')"><img src="Imagens/Ladir3.jpeg"
+                alt="Ladir 2" loading="lazy"></div>
+          </div>
         </div>
         <div class="exp-text">
           <span class="exp-label">Dia 16/10</span>
@@ -1976,6 +2204,12 @@
       <div class="exp-card fade-in">
         <div class="exp-image">
           <img src="Imagens/AME1.jpg" alt="Associação das Mulheres Extrativistas" loading="lazy">
+          <div class="exp-thumbnails">
+            <div class="exp-thumb active" onclick="switchExpImg(this, 'Imagens/AME1.jpg')"><img src="Imagens/AME1.jpg"
+                alt="AME 1" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/AME2.webp')"><img src="Imagens/AME2.webp"
+                alt="AME 2" loading="lazy"></div>
+          </div>
         </div>
         <div class="exp-text">
           <span class="exp-label">Dia 16/10</span>
@@ -1989,7 +2223,13 @@
 
       <div class="exp-card fade-in">
         <div class="exp-image">
-          <img src="Imagens/Açai1.jpeg" alt="Vivência do Açaí" loading="lazy">
+          <img src="Imagens/Açai2.jpeg" alt="Vivência do Açaí" loading="lazy">
+          <div class="exp-thumbnails">
+            <div class="exp-thumb active" onclick="switchExpImg(this, 'Imagens/Açai2.jpeg')"><img
+                src="Imagens/Açai2.jpeg" alt="Cesto de açaí" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/Açai3.jpeg')"><img src="Imagens/Açai3.jpeg"
+                alt="Debulha do açaí" loading="lazy"></div>
+          </div>
         </div>
         <div class="exp-text">
           <span class="exp-label">Dia 16/10</span>
@@ -2004,6 +2244,12 @@
       <div class="exp-card fade-in">
         <div class="exp-image">
           <img src="Imagens/PasseioFluvialOrla1.jpg" alt="Passeio Fluvial ao Entardecer" loading="lazy">
+          <div class="exp-thumbnails">
+            <div class="exp-thumb active" onclick="switchExpImg(this, 'Imagens/PasseioFluvialOrla1.jpg')"><img
+                src="Imagens/PasseioFluvialOrla1.jpg" alt="Passeio 1" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/PasseioFluvialOrla2.jpg')"><img
+                src="Imagens/PasseioFluvialOrla2.jpg" alt="Passeio 2" loading="lazy"></div>
+          </div>
         </div>
         <div class="exp-text">
           <span class="exp-label">Dia 17/10</span>
@@ -2018,6 +2264,14 @@
       <div class="exp-card fade-in">
         <div class="exp-image">
           <img src="Imagens/BanhoCheiro1.png" alt="Banho de Cheiro" loading="lazy">
+          <div class="exp-thumbnails">
+            <div class="exp-thumb active" onclick="switchExpImg(this, 'Imagens/BanhoCheiro1.png')"><img
+                src="Imagens/BanhoCheiro1.png" alt="Banho 1" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/BanhoCheiro2.png')"><img
+                src="Imagens/BanhoCheiro2.png" alt="Banho 2" loading="lazy"></div>
+            <div class="exp-thumb" onclick="switchExpImg(this, 'Imagens/BanhoCheiro3.png')"><img
+                src="Imagens/BanhoCheiro3.png" alt="Banho 3" loading="lazy"></div>
+          </div>
         </div>
         <div class="exp-text">
           <span class="exp-label">Dia 18/10</span>
@@ -2026,6 +2280,87 @@
             cheiro — ritual de purificação com ervas e essências da floresta — reflete a simplicidade e a autenticidade
             da vida ribeirinha, criando um momento sagrado de renovação e limpeza energética no último dia do retiro.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHOTO GALLERY ═══ -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Galeria</span>
+        <h2 class="section-title">Imagens da Amazônia</h2>
+        <div class="divider"></div>
+      </div>
+    </div>
+    <div class="gallery-track-wrapper">
+      <div class="gallery-track">
+        <!-- First set -->
+        <div class="gallery-item">
+          <img src="Imagens/Combu3.png" alt="Vista aérea da Ilha do Combu" loading="lazy">
+          <div class="gallery-caption">Vista aérea — Ilha do Combu</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Combu6.png" alt="Rio entre palmeiras" loading="lazy">
+          <div class="gallery-caption">Navegando entre as palmeiras</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/PasseioFluvialOrla2.jpg" alt="Dança no barco" loading="lazy">
+          <div class="gallery-caption">Danças regionais ao entardecer</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Açai3.jpeg" alt="Colheita do açaí" loading="lazy">
+          <div class="gallery-caption">Colheita artesanal do açaí</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/BanhoCheiro2.png" alt="Ritual de banho de cheiro" loading="lazy">
+          <div class="gallery-caption">Ritual sagrado — Banho de Cheiro</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Basílica3.jpg" alt="Interior da Basílica" loading="lazy">
+          <div class="gallery-caption">Basílica de Nossa Senhora de Nazaré</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Ladir3.jpeg" alt="Seu Ladir" loading="lazy">
+          <div class="gallery-caption">Seu Ladir — Guardião da Floresta</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Combu2.png" alt="Garça no barco" loading="lazy">
+          <div class="gallery-caption">Tranquilidade ribeirinha</div>
+        </div>
+        <!-- Duplicate set for infinite scroll -->
+        <div class="gallery-item">
+          <img src="Imagens/Combu3.png" alt="Vista aérea da Ilha do Combu" loading="lazy">
+          <div class="gallery-caption">Vista aérea — Ilha do Combu</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Combu6.png" alt="Rio entre palmeiras" loading="lazy">
+          <div class="gallery-caption">Navegando entre as palmeiras</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/PasseioFluvialOrla2.jpg" alt="Dança no barco" loading="lazy">
+          <div class="gallery-caption">Danças regionais ao entardecer</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Açai3.jpeg" alt="Colheita do açaí" loading="lazy">
+          <div class="gallery-caption">Colheita artesanal do açaí</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/BanhoCheiro2.png" alt="Ritual de banho de cheiro" loading="lazy">
+          <div class="gallery-caption">Ritual sagrado — Banho de Cheiro</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Basílica3.jpg" alt="Interior da Basílica" loading="lazy">
+          <div class="gallery-caption">Basílica de Nossa Senhora de Nazaré</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Ladir3.jpeg" alt="Seu Ladir" loading="lazy">
+          <div class="gallery-caption">Seu Ladir — Guardião da Floresta</div>
+        </div>
+        <div class="gallery-item">
+          <img src="Imagens/Combu2.png" alt="Garça no barco" loading="lazy">
+          <div class="gallery-caption">Tranquilidade ribeirinha</div>
         </div>
       </div>
     </div>
@@ -2293,6 +2628,19 @@
       const wasOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
+    }
+
+    // ─── Experience mini-gallery ───
+    function switchExpImg(thumb, src) {
+      const card = thumb.closest('.exp-card');
+      const mainImg = card.querySelector('.exp-image > img');
+      mainImg.style.opacity = '0';
+      setTimeout(() => {
+        mainImg.src = src;
+        mainImg.style.opacity = '1';
+      }, 200);
+      card.querySelectorAll('.exp-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
     }
 
     // ─── Hero particles ───
