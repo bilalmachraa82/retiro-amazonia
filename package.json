@@ -2,6 +2,7 @@
   "name": "retiro-amazonia",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Retiro Ascensão pelo Coração — Amazônia",
   "scripts": {
     "dev": "vercel dev"
