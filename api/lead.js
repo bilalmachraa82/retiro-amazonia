@@ -25,8 +25,15 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Name and email are required' });
         }
 
+        // Fallback: If no credentials, log to console and return success
+        if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_SHEET_ID || process.env.GOOGLE_SERVICE_ACCOUNT_JSON === '{}') {
+            console.log('Lead captured (No Sheets Configured):', { name, email, phone, interest, source });
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            return res.status(200).json({ success: true, warning: 'Lead saved to logs only (Sheets not configured)' });
+        }
+
         const sheetId = process.env.GOOGLE_SHEET_ID;
-        const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON || '{}');
+        const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
         const auth = new google.auth.GoogleAuth({
             credentials,
