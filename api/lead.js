@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { google } from 'googleapis';
 
 export const config = { runtime: 'nodejs', maxDuration: 10 };
