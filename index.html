@@ -1836,6 +1836,253 @@
         height: 40px;
       }
     }
+
+    /* ═══ PHOTO GALLERY ═══ */
+    .gallery-section {
+      padding: 100px 0 80px;
+      background: linear-gradient(180deg, #0a1a0f 0%, #0d2818 50%, #0a1a0f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+    }
+
+    .gallery-section .section-label {
+      text-align: center;
+      color: var(--gold);
+      font-family: var(--font-accent);
+      letter-spacing: 4px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .gallery-section h2 {
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .gallery-section .section-subtitle {
+      text-align: center;
+      color: rgba(232, 240, 235, 0.6);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1 / 1;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .gallery-item:nth-child(5) {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 26, 15, 0.6) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    .gallery-item .gallery-caption {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      color: var(--cream);
+      font-size: 0.85rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      z-index: 2;
+      font-family: var(--font-accent);
+      letter-spacing: 1px;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Lightbox */
+    .gallery-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      backdrop-filter: blur(20px);
+    }
+
+    .gallery-lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .gallery-lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 12px;
+      transform: scale(0.9);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-lightbox.active img {
+      transform: scale(1);
+    }
+
+    .gallery-lightbox .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.3s;
+    }
+
+    .gallery-lightbox .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .lightbox-prev {
+      left: 24px;
+    }
+
+    .lightbox-next {
+      right: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 0 12px;
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 1;
+        aspect-ratio: 16 / 9;
+      }
+
+      .gallery-item:nth-child(5) {
+        grid-column: span 1;
+        aspect-ratio: 1 / 1;
+      }
+
+      .gallery-section {
+        padding: 80px 0 60px;
+      }
+
+      .lightbox-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+      }
+
+      .lightbox-prev {
+        left: 12px;
+      }
+
+      .lightbox-next {
+        right: 12px;
+      }
+    }
   </style>
 </head>
 
@@ -1852,6 +2099,7 @@
         <li><a href="#programacao" onclick="closeMenu()">Programação</a></li>
         <li><a href="#experiencias" onclick="closeMenu()">Experiências</a></li>
         <li><a href="#investimento" onclick="closeMenu()">Investimento</a></li>
+        <li><a href="#galeria" onclick="closeMenu()">Galeria</a></li>
         <li><a href="#inscricao" class="nav-cta" onclick="closeMenu()">Inscreva-se</a></li>
       </ul>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -2615,6 +2863,75 @@
     </div>
   </section>
 
+  <!-- ═══ GALERIA DE FOTOS ═══ -->
+  <section class="gallery-section" id="galeria">
+    <div class="container">
+      <span class="section-label">📸 Galeria</span>
+      <h2>Momentos do Último Retiro</h2>
+      <p class="section-subtitle">Imagens autênticas da edição anterior — momentos de conexão, cura e celebração no
+        coração da Amazônia.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openLightbox(0)">
+        <img src="Imagens/retiro-12.jpeg" alt="Grupo junto à árvore gigante na floresta amazônica" loading="lazy">
+        <span class="gallery-caption">União com a floresta</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(1)">
+        <img src="Imagens/retiro-25.jpeg" alt="Cerimónia noturna com velas e taças" loading="lazy">
+        <span class="gallery-caption">Cerimónia sagrada</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(2)">
+        <img src="Imagens/retiro-17.jpeg" alt="Grupo visitando Filha do Combu" loading="lazy">
+        <span class="gallery-caption">Filha do Combu</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(3)">
+        <img src="Imagens/retiro-09.jpeg" alt="Placa colorida: Já percebeu que precisa de pouco pra ser feliz"
+          loading="lazy">
+        <span class="gallery-caption">Sabedoria amazônica</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(4)">
+        <img src="Imagens/retiro-21.jpeg" alt="Sessão de relaxamento e meditação coletiva" loading="lazy">
+        <span class="gallery-caption">Relaxamento profundo</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(5)">
+        <img src="Imagens/retiro-28.jpeg" alt="Círculo de partilha na floresta" loading="lazy">
+        <span class="gallery-caption">Roda de partilha</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(6)">
+        <img src="Imagens/retiro-24.jpeg" alt="Banho de rio amazônico" loading="lazy">
+        <span class="gallery-caption">Banho de rio</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(7)">
+        <img src="Imagens/retiro-26.jpeg" alt="Cerimónia do cacau com Dona Nena" loading="lazy">
+        <span class="gallery-caption">Cerimónia do cacau</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(8)">
+        <img src="Imagens/retiro-13.jpeg" alt="Artesanato amazônico colorido" loading="lazy">
+        <span class="gallery-caption">Artesanato local</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(9)">
+        <img src="Imagens/retiro-22.jpeg" alt="Sessão de meditação com natureza" loading="lazy">
+        <span class="gallery-caption">Meditação na floresta</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(10)">
+        <img src="Imagens/retiro-18.jpeg" alt="Grupo em foto de grupo com Filha do Combu" loading="lazy">
+        <span class="gallery-caption">Aventuras na ilha</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(11)">
+        <img src="Imagens/retiro-20.jpeg" alt="Dona Nena junto ao mural da Filha do Combu" loading="lazy">
+        <span class="gallery-caption">Dona Nena</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="gallery-lightbox" id="galleryLightbox">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar">✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)" aria-label="Anterior">‹</button>
+    <img id="lightboxImg" src="" alt="Foto do retiro">
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)" aria-label="Próxima">›</button>
+  </div>
+
   <!-- ═══ STICKY CTA ═══ -->
   <div class="sticky-cta" id="stickyCta">
     <span class="sticky-cta-text">Retiro Ascensão pelo Coração — 15 a 18 de Outubro 2026</span>
@@ -2639,14 +2956,15 @@
             <li><a href="#programacao">Programação</a></li>
             <li><a href="#experiencias">Experiências</a></li>
             <li><a href="#investimento">Investimento</a></li>
+            <li><a href="#galeria">Galeria</a></li>
             <li><a href="#inscricao">Inscreva-se</a></li>
           </ul>
         </div>
         <div>
           <h4>Contato</h4>
           <ul class="footer-links">
-            <li><a href="#">contato@ascensaopelocoracao.com</a></li>
-            <li><a href="#">WhatsApp: +55 (91) 00000-0000</a></li>
+            <li><a href="mailto:rosanakalil@yahoo.com.br">rosanakalil@yahoo.com.br</a></li>
+            <li><a href="https://wa.me/5561999483034" target="_blank">WhatsApp: +55 61 99948-3034</a></li>
             <li style="margin-top: 16px;"><a href="#">Instagram</a></li>
             <li><a href="#">Facebook</a></li>
           </ul>
@@ -2659,6 +2977,43 @@
   </footer>
 
   <script>
+    // ─── Gallery Lightbox ───
+    const galleryImages = [
+      'Imagens/retiro-12.jpeg', 'Imagens/retiro-25.jpeg', 'Imagens/retiro-17.jpeg',
+      'Imagens/retiro-09.jpeg', 'Imagens/retiro-21.jpeg', 'Imagens/retiro-28.jpeg',
+      'Imagens/retiro-24.jpeg', 'Imagens/retiro-26.jpeg', 'Imagens/retiro-13.jpeg',
+      'Imagens/retiro-22.jpeg', 'Imagens/retiro-18.jpeg', 'Imagens/retiro-20.jpeg'
+    ];
+    let currentLightboxIndex = 0;
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      const lb = document.getElementById('galleryLightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = galleryImages[index];
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('galleryLightbox');
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navLightbox(dir) {
+      currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightboxImg').src = galleryImages[currentLightboxIndex];
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('galleryLightbox');
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+
     // ─── Navigation scroll ───
     const nav = document.getElementById('nav');
     const hero = document.getElementById('hero');
