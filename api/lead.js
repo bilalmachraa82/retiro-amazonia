@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { name, email, phone, interest, source } = req.body;
+        const { name, email, phone, interest, source, cidade, nascimento } = req.body;
 
         if (!name || !email) {
             return res.status(400).json({ error: 'Name and email are required' });
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 
         // Fallback: If no credentials, log to console and return success
         if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.GOOGLE_SHEET_ID || process.env.GOOGLE_SERVICE_ACCOUNT_JSON === '{}') {
-            console.log('Lead captured (No Sheets Configured):', { name, email, phone, interest, source });
+            console.log('Lead captured (No Sheets Configured):', { name, email, phone, interest, source, cidade, nascimento });
             res.setHeader('Access-Control-Allow-Origin', '*');
             return res.status(200).json({ success: true, warning: 'Lead saved to logs only (Sheets not configured)' });
         }
@@ -44,11 +44,11 @@ export default async function handler(req, res) {
         const sheets = google.sheets({ version: 'v4', auth });
 
         const timestamp = new Date().toISOString();
-        const values = [[timestamp, name, email, phone || '', interest || '', source || 'ai-agent']];
+        const values = [[timestamp, name, email, phone || '', cidade || '', nascimento || '', interest || '', source || 'formulario']];
 
         await sheets.spreadsheets.values.append({
             spreadsheetId: sheetId,
-            range: 'Leads!A:F',
+            range: 'Leads!A:H',
             valueInputOption: 'USER_ENTERED',
             requestBody: { values },
         });

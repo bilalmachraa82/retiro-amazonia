@@ -26,7 +26,10 @@
   "location": { "@type": "Place", "name": "Belém, Pará, Brasil", "address": { "@type": "PostalAddress", "addressLocality": "Belém", "addressRegion": "PA", "addressCountry": "BR" } },
   "organizer": { "@type": "Person", "name": "Hélène Abiassi" },
   "description": "Retiro de imersão espiritual de 4 dias na Amazônia com Hélène Abiassi — Cura pelo Coração, meditações, iniciações e vivências amazônicas.",
-  "offers": { "@type": "Offer", "price": "2880.00", "priceCurrency": "BRL", "availability": "https://schema.org/LimitedAvailability" }
+  "offers": [
+    { "@type": "Offer", "name": "Cartão de Crédito", "price": "3030.00", "priceCurrency": "BRL", "availability": "https://schema.org/LimitedAvailability" },
+    { "@type": "Offer", "name": "Pix ou Transferência", "price": "2880.00", "priceCurrency": "BRL", "availability": "https://schema.org/LimitedAvailability" }
+  ]
 }
 </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2732,8 +2735,11 @@
       </div>
       <div class="invest-box fade-in">
         <div class="invest-label">Valor do Retiro Completo</div>
-        <div class="invest-price">R$ 2.880,00</div>
-        <div class="invest-installment">Em até 12x no cartão de crédito (com juros da operadora)</div>
+        <div class="invest-price">R$ 3.030,00</div>
+        <div class="invest-installment">Cartão de crédito — parcelas em até 12x com juros</div>
+        <div class="invest-pix" style="margin-top: 12px; font-size: 1.15rem; color: var(--gold); font-family: 'Cormorant Garamond', serif;">
+          ou <strong>R$ 2.880,00</strong> via Pix ou transferência bancária
+        </div>
         <ul class="invest-features">
           <li>4 dias de retiro com Hélène Abiassi</li>
           <li>Meditações, iniciações e práticas de cura</li>
@@ -2848,8 +2854,8 @@
             Posso parcelar o pagamento?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">Sim. O valor de R$ 2.880,00 pode ser parcelado em até 12x no cartão de crédito, com
-            juros da operadora. Após a inscrição, enviaremos o link de pagamento com todas as opções.</div>
+          <div class="faq-answer">Sim. O valor de R$ 3.030,00 pode ser parcelado em até 12x no cartão de crédito, com
+            juros. Se preferir pagar via Pix ou transferência bancária, o valor é R$ 2.880,00. Após a inscrição, enviaremos o link de pagamento com todas as opções.</div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
@@ -2921,6 +2927,70 @@
         <img src="Imagens/retiro-20.jpeg" alt="Dona Nena junto ao mural da Filha do Combu" loading="lazy">
         <span class="gallery-caption">Dona Nena</span>
       </div>
+      <div class="gallery-item" onclick="openLightbox(12)">
+        <img src="Imagens/retiro-29.jpeg" alt="Selfie do grupo no jardim tropical" loading="lazy">
+        <span class="gallery-caption">Sorrisos do grupo</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(13)">
+        <img src="Imagens/retiro-35.jpeg" alt="Roda de partilha com música no pavilhão da floresta" loading="lazy">
+        <span class="gallery-caption">Música na floresta</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(14)">
+        <img src="Imagens/retiro-38.jpeg" alt="Placa artesanal: Que a gente saiba florir onde a vida nos plantar" loading="lazy">
+        <span class="gallery-caption">Sabedoria ribeirinha</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(15)">
+        <img src="Imagens/retiro-39.jpeg" alt="Apresentação da AME — Associação de Mulheres Extrativistas" loading="lazy">
+        <span class="gallery-caption">Mulheres da AME</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(16)">
+        <img src="Imagens/retiro-40.jpeg" alt="Grupo reunido sob árvore centenária na floresta" loading="lazy">
+        <span class="gallery-caption">Raízes da floresta</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(17)">
+        <img src="Imagens/retiro-41.jpeg" alt="Barcos artesanais amazônicos coloridos" loading="lazy">
+        <span class="gallery-caption">Artesanato amazônico</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(18)">
+        <img src="Imagens/retiro-42.jpeg" alt="Apresentação sobre abelhas nativas na AME" loading="lazy">
+        <span class="gallery-caption">Abelhas da Amazônia</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(19)">
+        <img src="Imagens/retiro-43.jpeg" alt="Grupo junto ao mural da Fábrica de Chocolate Dona Nena" loading="lazy">
+        <span class="gallery-caption">Fábrica Dona Nena</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(20)">
+        <img src="Imagens/retiro-47.jpeg" alt="Grupo em trilha pela floresta amazônica" loading="lazy">
+        <span class="gallery-caption">Trilha na floresta</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(21)">
+        <img src="Imagens/retiro-48.jpeg" alt="Sessão de cura e relaxamento no pavilhão" loading="lazy">
+        <span class="gallery-caption">Sessão de cura</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(22)">
+        <img src="Imagens/retiro-50.jpeg" alt="Banho de rio com sorrisos na Amazônia" loading="lazy">
+        <span class="gallery-caption">Alegria no rio</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(23)">
+        <img src="Imagens/retiro-51.jpeg" alt="Cerimónia do Banho de Cheiro junto ao rio" loading="lazy">
+        <span class="gallery-caption">Banho de Cheiro</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(24)">
+        <img src="Imagens/retiro-52.jpeg" alt="Meditação em círculo com frutas e folhas sagradas" loading="lazy">
+        <span class="gallery-caption">Ritual com a terra</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(25)">
+        <img src="Imagens/retiro-53.jpeg" alt="Meditação noturna em círculo com velas" loading="lazy">
+        <span class="gallery-caption">Cerimónia de velas</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(26)">
+        <img src="Imagens/retiro-54.jpeg" alt="Foto de grupo noturna com velas e flores" loading="lazy">
+        <span class="gallery-caption">Encerramento sagrado</span>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(27)">
+        <img src="Imagens/retiro-55.jpeg" alt="Abraço à árvore Samaúma centenária" loading="lazy">
+        <span class="gallery-caption">Abraço à Samaúma</span>
+      </div>
     </div>
   </section>
 
@@ -2982,7 +3052,13 @@
       'Imagens/retiro-12.jpeg', 'Imagens/retiro-25.jpeg', 'Imagens/retiro-17.jpeg',
       'Imagens/retiro-09.jpeg', 'Imagens/retiro-21.jpeg', 'Imagens/retiro-28.jpeg',
       'Imagens/retiro-24.jpeg', 'Imagens/retiro-26.jpeg', 'Imagens/retiro-13.jpeg',
-      'Imagens/retiro-22.jpeg', 'Imagens/retiro-18.jpeg', 'Imagens/retiro-20.jpeg'
+      'Imagens/retiro-22.jpeg', 'Imagens/retiro-18.jpeg', 'Imagens/retiro-20.jpeg',
+      'Imagens/retiro-29.jpeg', 'Imagens/retiro-35.jpeg', 'Imagens/retiro-38.jpeg',
+      'Imagens/retiro-39.jpeg', 'Imagens/retiro-40.jpeg', 'Imagens/retiro-41.jpeg',
+      'Imagens/retiro-42.jpeg', 'Imagens/retiro-43.jpeg', 'Imagens/retiro-47.jpeg',
+      'Imagens/retiro-48.jpeg', 'Imagens/retiro-50.jpeg', 'Imagens/retiro-51.jpeg',
+      'Imagens/retiro-52.jpeg', 'Imagens/retiro-53.jpeg', 'Imagens/retiro-54.jpeg',
+      'Imagens/retiro-55.jpeg'
     ];
     let currentLightboxIndex = 0;
 
@@ -3046,9 +3122,38 @@
       document.querySelectorAll('.day-tab')[index].classList.add('active');
     }
 
+    // ─── Google Apps Script endpoint for lead capture ───
+    const GOOGLE_SCRIPT_URL = 'COLAR_URL_DO_APPS_SCRIPT_AQUI';
+
+    async function sendLead(data) {
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'COLAR_URL_DO_APPS_SCRIPT_AQUI') return;
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(data),
+        });
+      } catch (err) { /* silently continue */ }
+    }
+
     // ─── Form submission ───
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      await sendLead({
+        name: document.getElementById('nome').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('telefone').value,
+        interest: document.getElementById('interesse').value || '',
+        source: 'formulario-inscricao',
+        cidade: document.getElementById('cidade').value,
+        nascimento: document.getElementById('nascimento').value,
+      });
+
       document.getElementById('formArea').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
       window.scrollTo({ top: document.getElementById('inscricao').offsetTop - 80, behavior: 'smooth' });
@@ -3113,7 +3218,7 @@
             const priceEl = entry.target.querySelector('.invest-price');
             if (!priceEl.dataset.animated) {
               priceEl.dataset.animated = '1';
-              animateCounter(priceEl, 2880);
+              animateCounter(priceEl, 3030);
             }
           }
         }
@@ -3651,22 +3756,11 @@
         leadSubmit.disabled = true;
         leadSubmit.textContent = 'Enviando...';
 
-        try {
-          await fetch('/api/lead', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, phone, interest: 'retiro', source: 'ai-agent' }),
-          });
+        await sendLead({ name, email, phone, interest: 'retiro', source: 'ai-agent' });
 
-          leadForm.dataset.submitted = '1';
-          leadForm.innerHTML = '<p>✨ Gratidão! Os seus dados foram recebidos com amor. Em breve, a jornada continua no seu email. 🌿</p>';
-          appendMsg('Que alegria! Recebi os seus dados. A equipa da Rosana Kalil entrará em contacto em breve. Namastê 🙏🌺', 'bot');
-        } catch (err) {
-          // Fallback Success (since we serve static sometimes)
-          leadForm.dataset.submitted = '1';
-          leadForm.innerHTML = '<p>✨ Gratidão! Os seus dados foram recebidos com amor. Em breve, a jornada continua no seu email. 🌿</p>';
-          appendMsg('Que alegria! Recebi os seus dados. A equipa da Rosana Kalil entrará em contacto em breve. Namastê 🙏🌺', 'bot');
-        }
+        leadForm.dataset.submitted = '1';
+        leadForm.innerHTML = '<p>✨ Gratidão! Os seus dados foram recebidos com amor. Em breve, a jornada continua no seu email. 🌿</p>';
+        appendMsg('Que alegria! Recebi os seus dados. A equipa da Rosana Kalil entrará em contacto em breve. Namastê 🙏🌺', 'bot');
       });
 
       function appendMsg(text, type) {
