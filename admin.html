@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — Inscrições Retiro Amazônia</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+    .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 24px 32px; border-bottom: 1px solid #c9a96e33; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .header h1 { font-size: 1.5rem; color: #c9a96e; }
+    .stats { display: flex; gap: 24px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-number { font-size: 2rem; font-weight: 700; color: #c9a96e; }
+    .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .login-box { max-width: 400px; margin: 120px auto; padding: 40px; background: #1a1a2e; border-radius: 12px; border: 1px solid #c9a96e33; }
+    .login-box h2 { color: #c9a96e; margin-bottom: 20px; text-align: center; }
+    .login-box input { width: 100%; padding: 12px 16px; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #e0e0e0; font-size: 1rem; margin-bottom: 16px; }
+    .login-box button, .btn { background: linear-gradient(135deg, #c9a96e, #b8860b); color: #0a0a0a; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem; }
+    .login-box button:hover, .btn:hover { opacity: 0.9; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .search { padding: 10px 16px; background: #1a1a2e; border: 1px solid #333; border-radius: 8px; color: #e0e0e0; width: 300px; max-width: 100%; }
+    table { width: 100%; border-collapse: collapse; background: #1a1a2e; border-radius: 12px; overflow: hidden; }
+    th { background: #16213e; color: #c9a96e; padding: 14px 16px; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+    td { padding: 12px 16px; border-bottom: 1px solid #ffffff0a; font-size: 0.9rem; }
+    tr:hover td { background: #ffffff05; }
+    .source-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .source-formulario { background: #c9a96e22; color: #c9a96e; }
+    .source-ai { background: #4ecdc422; color: #4ecdc4; }
+    .source-other { background: #ffffff15; color: #aaa; }
+    .empty { text-align: center; padding: 60px 20px; color: #666; }
+    .error { color: #ff6b6b; text-align: center; padding: 20px; }
+    .export-btn { background: #2a2a3e; color: #c9a96e; border: 1px solid #c9a96e33; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+    .export-btn:hover { background: #333350; }
+    @media (max-width: 768px) {
+      table { display: block; overflow-x: auto; }
+      .search { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loginScreen" class="login-box">
+    <h2>Retiro Amazonia</h2>
+    <p style="color: #888; text-align: center; margin-bottom: 20px;">Painel de Inscrições</p>
+    <input type="password" id="tokenInput" placeholder="Token de acesso" onkeydown="if(event.key==='Enter') login()">
+    <button onclick="login()" style="width: 100%;">Entrar</button>
+    <p id="loginError" class="error" style="display: none; margin-top: 12px;"></p>
+  </div>
+
+  <div id="dashboard" style="display: none;">
+    <div class="header">
+      <h1>Inscrições — Retiro Amazonia</h1>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number" id="totalLeads">-</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="todayLeads">-</div>
+          <div class="stat-label">Hoje</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="formLeads">-</div>
+          <div class="stat-label">Formulário</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" id="aiLeads">-</div>
+          <div class="stat-label">Chat IA</div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="toolbar">
+        <input type="text" class="search" id="searchInput" placeholder="Pesquisar por nome, email, cidade..." oninput="filterTable()">
+        <button class="export-btn" onclick="exportCSV()">Exportar CSV</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Cidade</th>
+            <th>Interesse</th>
+            <th>Origem</th>
+          </tr>
+        </thead>
+        <tbody id="leadsBody"></tbody>
+      </table>
+      <div id="emptyState" class="empty" style="display: none;">Ainda sem inscrições.</div>
+    </div>
+  </div>
+
+  <script>
+    let allLeads = [];
+    let token = '';
+
+    async function login() {
+      token = document.getElementById('tokenInput').value.trim();
+      if (!token) return;
+
+      try {
+        const res = await fetch('/api/leads?token=' + encodeURIComponent(token));
+        if (res.status === 401) {
+          document.getElementById('loginError').textContent = 'Token inválido.';
+          document.getElementById('loginError').style.display = 'block';
+          return;
+        }
+        const data = await res.json();
+        if (!data.success) throw new Error(data.error);
+
+        allLeads = data.leads;
+        sessionStorage.setItem('admin_token', token);
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        renderLeads(allLeads);
+        updateStats(allLeads);
+      } catch (err) {
+        document.getElementById('loginError').textContent = 'Erro: ' + err.message;
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    function renderLeads(leads) {
+      const body = document.getElementById('leadsBody');
+      if (leads.length === 0) {
+        body.innerHTML = '';
+        document.getElementById('emptyState').style.display = 'block';
+        return;
+      }
+      document.getElementById('emptyState').style.display = 'none';
+
+      body.innerHTML = leads.map((l, i) => {
+        const date = new Date(l.created_at).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        const src = l.source || 'site';
+        const badgeClass = src.includes('formulario') ? 'source-formulario' : src.includes('ai') ? 'source-ai' : 'source-other';
+        return '<tr>'
+          + '<td>' + (i + 1) + '</td>'
+          + '<td>' + date + '</td>'
+          + '<td><strong>' + esc(l.name) + '</strong></td>'
+          + '<td><a href="mailto:' + esc(l.email) + '" style="color:#c9a96e">' + esc(l.email) + '</a></td>'
+          + '<td>' + esc(l.phone || '-') + '</td>'
+          + '<td>' + esc(l.cidade || '-') + '</td>'
+          + '<td>' + esc(l.interest || '-') + '</td>'
+          + '<td><span class="source-badge ' + badgeClass + '">' + esc(src) + '</span></td>'
+          + '</tr>';
+      }).join('');
+    }
+
+    function updateStats(leads) {
+      document.getElementById('totalLeads').textContent = leads.length;
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('todayLeads').textContent = leads.filter(l => l.created_at && l.created_at.startsWith(today)).length;
+      document.getElementById('formLeads').textContent = leads.filter(l => (l.source || '').includes('formulario')).length;
+      document.getElementById('aiLeads').textContent = leads.filter(l => (l.source || '').includes('ai')).length;
+    }
+
+    function filterTable() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = allLeads.filter(l =>
+        (l.name || '').toLowerCase().includes(q) ||
+        (l.email || '').toLowerCase().includes(q) ||
+        (l.cidade || '').toLowerCase().includes(q) ||
+        (l.phone || '').toLowerCase().includes(q)
+      );
+      renderLeads(filtered);
+    }
+
+    function exportCSV() {
+      const headers = ['Data', 'Nome', 'Email', 'Telefone', 'Cidade', 'Nascimento', 'Interesse', 'Origem'];
+      const rows = allLeads.map(l => [
+        new Date(l.created_at).toLocaleString('pt-BR'),
+        l.name, l.email, l.phone || '', l.cidade || '', l.nascimento || '', l.interest || '', l.source || ''
+      ]);
+      const csv = [headers, ...rows].map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+      const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'inscricoes-retiro-amazonia.csv';
+      a.click();
+    }
+
+    function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    // Auto-login if token in session
+    const saved = sessionStorage.getItem('admin_token');
+    if (saved) { document.getElementById('tokenInput').value = saved; login(); }
+  </script>
+</body>
+</html>

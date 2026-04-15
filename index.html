@@ -3122,16 +3122,12 @@
       document.querySelectorAll('.day-tab')[index].classList.add('active');
     }
 
-    // ─── Google Apps Script endpoint for lead capture ───
-    const GOOGLE_SCRIPT_URL = 'COLAR_URL_DO_APPS_SCRIPT_AQUI';
-
+    // ─── Lead capture via Neon database ───
     async function sendLead(data) {
-      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'COLAR_URL_DO_APPS_SCRIPT_AQUI') return;
       try {
-        await fetch(GOOGLE_SCRIPT_URL, {
+        await fetch('/api/lead', {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
       } catch (err) { /* silently continue */ }
